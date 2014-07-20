@@ -16,6 +16,12 @@ import android.widget.TextView;
 import android.view.View;import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
 
 // Added java imports
 import java.util.ArrayList;
@@ -78,6 +84,19 @@ public class MyActivity extends Activity {
                     android.R.layout.simple_list_item_1, deviceSensorsList));
         //Make expandable listview
         //http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
+        listView.setOnItemClickListener(new OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3)
+            {
+                String value = (String)adapter.getItemAtPosition(position);
+                // assuming string and if you want to get the value on click of list item
+                // do what you intend to do on click of listview row
+            }
+        });
+
+
     }
 
     public void onClickListener() {
