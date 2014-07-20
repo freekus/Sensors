@@ -76,6 +76,8 @@ public class MyActivity extends Activity {
             // Bind the adapter to the list of device names
             listView.setAdapter(new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1, deviceSensorsList));
+        //Make expandable listview
+        //http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
     }
 
     public void onClickListener() {
