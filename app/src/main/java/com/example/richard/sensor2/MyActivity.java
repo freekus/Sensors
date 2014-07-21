@@ -1,6 +1,7 @@
 package com.example.richard.sensor2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -87,12 +88,28 @@ public class MyActivity extends Activity {
         listView.setOnItemClickListener(new OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
+            public void onItemClick(AdapterView<?> adapter, View view, int position,
                                     long arg3)
             {
                 String value = (String)adapter.getItemAtPosition(position);
                 // assuming string and if you want to get the value on click of list item
                 // do what you intend to do on click of listview row
+                // When clicked, show a toast with the TextView text
+                switch( position )
+                {
+                    case 0:  Intent myIntent = new Intent(view.getContext(), Test1.class);
+                        // Carry a bundle of data to the activity as well.
+                        // Inside the sendMessage() method, use findViewById() to get the EditText element
+                        // and add its text value to the intent:
+                       /* EditText editText = (EditText) findViewById(R.id.edit_message);
+                        String message = editText.getText().toString();
+                        intent.putExtra(EXTRA_MESSAGE, message); */
+                        startActivity(myIntent);
+                        break;
+                    case 1: Intent myIntent2 = new Intent(view.getContext(), Test2.class);
+                        startActivityForResult(myIntent2, 0);
+                }
+
             }
         });
 
