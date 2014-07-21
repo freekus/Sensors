@@ -83,8 +83,24 @@ public class Test2 extends Activity implements SensorEventListener {
     {
         // NOTE: The accelerometer axis' change when device is reoriented
         // IOW, X and Y become reversed when in landscape orientation
+        //
+        //Must provide own orientation transformations
+        //
+        //SensorManager.getRotationMatrix(rotate, null, accelerometerValues,magneticFieldValues);
+        //SensorManager.remapCoordinateSystem(rotate, SensorManager.AXIS_X, SensorManager.AXIS_MINUS_Z, rotate); //Overwriting rotate matrix with the rotated values
+        //SensorManager.getOrientation(rotate, rotationValues);
         accelTextView.setText("X: "+ event.values[0] + "\nY: " +
                 event.values[1] + "\nZ:" + event.values[2]);
+
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
 
     }
