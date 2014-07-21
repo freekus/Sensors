@@ -1,24 +1,60 @@
 package com.example.richard.sensor2;
 
 import android.app.Activity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.example.richard.sensor2.R;
+import android.widget.ListView;
 
-public class Test2 extends Activity {
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Test2 extends Activity implements SensorEventListener {
+
+    // Get a reference to the SensorManager class
+    //variables
+    private ListView listView;
+    private SensorManager mSensorManager;
+    //list of sensors
+    private List<Sensor> deviceSensors = null;
+    //list of sensors names
+    private List<String> deviceSensorsList = new ArrayList<String>();
+
+    private Sensor accelerometer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test2);
+        setContentView(R.layout.activity_test1);
+
+        //create instance of sensor manager and get system sensor service
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        //create instance of list view
+        listView = ((ListView) findViewById(R.id.listView1));
+
+        //get list of all types of sensors in you device
+        deviceSensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
+            /*you can get specific sensors by selecting type in getSensorList(type you want);*/
+
+        accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.test2, menu);
+        getMenuInflater().inflate(R.menu.test1, menu);
         return true;
     }
 
@@ -33,4 +69,15 @@ public class Test2 extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void onAccuracyChanged (Sensor sensor, int accuracy)
+    {
+
+    }
+
+    public void onSensorChanged (SensorEvent event)
+    {
+
+    }
+
 }
