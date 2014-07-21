@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +28,13 @@ public class Test2 extends Activity implements SensorEventListener {
     private List<String> deviceSensorsList = new ArrayList<String>();
 
     private Sensor accelerometer;
+    private TextView accelTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test1);
+        setContentView(R.layout.activity_test2);
 
         //create instance of sensor manager and get system sensor service
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -45,6 +47,8 @@ public class Test2 extends Activity implements SensorEventListener {
 
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+        accelTextView = (TextView)findViewById(R.id.accelTextView);
 
 
 
@@ -77,6 +81,11 @@ public class Test2 extends Activity implements SensorEventListener {
 
     public void onSensorChanged (SensorEvent event)
     {
+        // NOTE: The accelerometer axis' change when device is reoriented
+        // IOW, X and Y become reversed when in landscape orientation
+        accelTextView.setText("X: "+ event.values[0] + "\nY: " +
+                event.values[1] + "\nZ:" + event.values[2]);
+
 
     }
 
