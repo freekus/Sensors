@@ -108,6 +108,7 @@ public class MyActivity extends Activity {
                         break;
                     case 1: Intent myIntent2 = new Intent(view.getContext(), Test2.class);
                         startActivityForResult(myIntent2, 0);
+                        break;
                 }
 
             }
